@@ -1,12 +1,13 @@
 
 // clase molde para instrumentos
 class Instrumento {
-    constructor(id, imagen = false, nombre, marca, precio) {
+    constructor(id, imagen = false, nombre, marca, precio,vendidos) {
         this.id= id;
         this.imagen = imagen;
         this.nombre = nombre;
         this.marca = marca;
         this.precio = parseInt(precio);
+        this.vendidos = parseInt(vendidos);
     }
 }
 
@@ -26,7 +27,8 @@ async function apiProductosPorCategoria(categoria = categoriaSeleccionada) {
                 productoMl.thumbnail_id,
                 productoMl.title,
                 productoMl.attributes[0].value_name,
-                productoMl.price
+                productoMl.price,
+                productoMl.sold_quantity
             ));
         }
         // Resuelve la promesa con los datos
@@ -178,6 +180,7 @@ function cargarCatalogo(productos) {
                     <div class="card-body">
                     <h4>${producto.nombre} </h4>
                     <p>Marca: ${producto.marca}</p>
+                    <p>Total vendidos: ${producto.vendidos}</p>
                     <p><b>Precio: $ ${producto.precio}</b></p>
                     <a href="#" class="btn btn-success botonAgregar" data-id="${producto.id}">Agregar al Carrito</a>
                     </div>
@@ -198,11 +201,10 @@ function cargarCatalogo(productos) {
                     timer:1000,     
                     icon: "success",
                 });
-        });
-
-        }
+            });
         }
     }
+}
 
 // elementos 
 const divCatalogo = document.querySelector("#divCatalogo"); 
@@ -212,8 +214,6 @@ const spanTotalCarrito = document.querySelector('#totalCarrito');
 const formBuscar = document.querySelector('#formBuscar');
 const inputBuscar = document.querySelector('#inputBuscar');
 const checkbox = document.querySelector('#checkbox');
-const divFiltrosNombres = document.querySelector('#filtrosNombres');
-const divFiltrosCategoria = document.querySelector('#filtrosCategoria');
 const divFiltrosMarca = document.querySelector('#filtrosMarca');
 const botonFiltros = document.querySelector("#filtros");
 const botonCarrito = document.querySelector("#carrito");
@@ -233,8 +233,8 @@ vaciarCarrito.addEventListener('click', () => {
 pagar.addEventListener('click', () => {
     carrito.comprarCarrito();
     Swal.fire({
-        title: "¡Su pedido está en camino !",
-        text: "Su compra ha sido realizada con éxito",
+        title: "¡Su compra ha sido realizada con éxito !",
+        text: "Gracias por confiar en nosotros",
         icon: "success",
         confirmButtonText: "Seguir Comprando",
     });
@@ -293,13 +293,49 @@ function filtrarCatalogo() {
         .map((checkbox) => checkbox.nextElementSibling.textContent);
 
     if (marcasFiltradas.length === 0) {
-        cargarCatalogo(productos); // Mostrar todos los productos si no hay filtros seleccionados
+        // Mostrar todos los productos si no hay filtros seleccionados
+        cargarCatalogo(productos); 
     } else {
         const productosFiltrados = productos.filter(
             (producto) => marcasFiltradas.includes(producto.marca)
         );
-        cargarCatalogo(productosFiltrados); // Mostrar los productos filtrados por marca
+        // Mostrar los productos filtrados por marca
+        cargarCatalogo(productosFiltrados); 
     }
 }
+function mostrarProductosPorPrecioAscendente(productos) {
+    const productosOrdenados = productos.slice().sort((a, b) => a.precio - b.precio);
+    cargarCatalogo(productosOrdenados);
+}
+function mostrarProductosPorPrecioDescendente(productos) {
+    const productosOrdenados = productos.slice().sort((a, b) => b.precio - a.precio);
+    cargarCatalogo(productosOrdenados);
+}
+ordenar.addEventListener('change', (event) => {
+    event.preventDefault();
+    const valorSeleccionado = ordenar.value;
+    if (valorSeleccionado === 'precioMenor') {
+        event.preventDefault()
+        mostrarProductosPorPrecioAscendente(productos);
+    } else if (valorSeleccionado === 'precioMayor') {
+        mostrarProductosPorPrecioDescendente(productos); 
+    } else if (valorSeleccionado === 'defecto') {
+        cargarCatalogo(productos);
+    }
+})
+const btnMasVendidos = document.querySelector('#botonMasVendidos');
+function masVendidos(productos) {
+    const productosMasVendidos = productos.slice().sort((a, b) => b.vendidos - a.vendidos);
+    cargarCatalogo(productosMasVendidos.slice(0,5));
+}
+// llamo a los mas vendidos
+btnMasVendidos.addEventListener('click', (event) => {
+    event.preventDefault();
+    masVendidos(productos)
+});
+const todosLosProductos= document.querySelector('#btnTodos');
+btnTodos.addEventListener('click',(event) =>
+    cargarCatalogo(productos)
+    )
 
 

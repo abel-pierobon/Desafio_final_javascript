@@ -20,7 +20,9 @@
         <!-- Boton de filtrado, buscador y boton carrito -->
         <section class="botonesHtml">
             <div>
-                <img id="filtros" class="" src="img/filtrar.png" alt="filtro">
+                <a href="#" id="btnTodos" class="btn btn-success filtros">Catalogo Completo</a>
+                <a href="#" id="botonMasVendidos" class="btn btn-success filtros">Los mas vendidos</a>
+                <a href="#" id="filtros" class="btn btn-success filtros">Por Marca</a>
             </div>
             <div class="buscardorOrdenar">
                 <form class="container" id="formBuscar">
@@ -43,13 +45,13 @@
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
                         <h2>Productos en carrito:</h2>
-                        
+                        <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" > Seguir Comprando </button>
                     </div>
                     <div class="offcanvas-body" id="carritoMostrar">
                     </div>
                     <h3 class="total">Total: $ <span id="totalCarrito"></span></h3>
                     <div class="botonesCarrito2 oculto">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" > Seguir Comprando </button>
+                        
                         <a href="#" id="botonComprar" class="btn btn-success  btnComprar oculto">PAGAR</a>
                         <img src="img/vaciar.png" id="vaciar" alt="">
                     </div>
