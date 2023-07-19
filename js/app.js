@@ -130,11 +130,21 @@ class Carrito{
             this.total += producto.precio * producto.cantidad;
             this.totalProductos += producto.cantidad;
         }
-         // Oculto el botón Comprar si no hay productos
+         // Ocultar elementos si no hay productos en el carrito 
         if (this.totalProductos > 0) {
-            botonComprar.classList.remove("oculto"); // Muestro el botón
+            botonComprar.classList.remove("oculto"); 
+            vaciarCarrito.classList.remove("oculto"); 
+            comprando.innerText +=`continua comprando`;
+            total.classList.remove('oculto');
+            tituloCarrito.innerText +=`Productos en carrito:`;
         } else {
-            botonComprar.classList.add("oculto"); // Oculto el botón
+            botonComprar.classList.add("oculto"); 
+            vaciarCarrito.classList.add("oculto"); 
+            comprando.innerText =''
+            comprando.innerText +=`Selecciona tu producto`;
+            total.classList.add("oculto"); 
+            tituloCarrito.innerText =''
+            tituloCarrito.innerText +=`CARRITO VACÍO`;
         }
         // botones de quitar
         const botonesQuitar= document.querySelectorAll('.botonQuitar');
@@ -171,7 +181,7 @@ function cargarCatalogo(productos) {
     divCatalogo.className = 'row';
     for (const producto of productos) {
         divCatalogo.innerHTML +=  `
-            <div class="card mb-3" style="max-width: 700px;">
+            <div class="card mb-3" style="max-width:850px;">
                 <div class="row g-0">
                     <div class="col-md-5">
                     <img class="imagenesCarrito" src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
@@ -211,6 +221,8 @@ const divCatalogo = document.querySelector("#divCatalogo");
 const divCarrito = document.querySelector('#carritoMostrar');
 const spanCantidadProductos = document.querySelector('#cantidadProductos');
 const spanTotalCarrito = document.querySelector('#totalCarrito');
+const tituloCarrito = document.querySelector('.tituloCarrito');
+const total = document.querySelector('.total');
 const formBuscar = document.querySelector('#formBuscar');
 const inputBuscar = document.querySelector('#inputBuscar');
 const checkbox = document.querySelector('#checkbox');
@@ -220,7 +232,7 @@ const botonCarrito = document.querySelector("#carrito");
 const vaciarCarrito = document.querySelector('#vaciar');
 const ordenar = document.querySelector('#seleccionar');
 const pagar = document.getElementById('botonComprar');
-
+const comprando = document.getElementById('btnSeguirComprando');
 
 // objeto carrito
 const carrito = new Carrito(); 
@@ -334,8 +346,10 @@ btnMasVendidos.addEventListener('click', (event) => {
     masVendidos(productos)
 });
 const todosLosProductos= document.querySelector('#btnTodos');
-btnTodos.addEventListener('click',(event) =>
+btnTodos.addEventListener('click',(event) =>{
+    event.preventDefault();
     cargarCatalogo(productos)
-    )
+});
+
 
 
