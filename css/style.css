@@ -18,6 +18,7 @@ body {
     background-color: #e0f3b2;
     background-color: #eefaa8;
 } 
+
 .botonesHtml{
     display: grid;
     grid-template-columns: 10% auto 10%;
@@ -46,9 +47,6 @@ body {
     width: fit-content;
     height: fit-content;
     backface-visibility: inherit;
-    border: solid;
-    border-radius: 3px;
-    border-color: aliceblue;
 }
 .imagenCatalogo{
     width: 150px;
@@ -90,6 +88,9 @@ body {
 img{
     width: 180px;
     height: 220px;
+}
+#btnSeguirComprando{
+    margin-top: 30px;
 }
 .botonQuitar{
     border-radius: 10px;
@@ -140,8 +141,6 @@ h2 span {
     padding: 5px;
     width: 25px;
     height: 30px;
-    right:355px;
-    top: 120px;
     text-align: center;
     font-size: 14px;
     margin: 10px 0 0 30px;
@@ -258,7 +257,6 @@ h3{
 }
 .botonesCarrito2{
     display: flex;
-
     justify-content: space-evenly;
     margin: 10px;
     align-items:center;

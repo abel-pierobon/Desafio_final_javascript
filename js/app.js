@@ -134,6 +134,7 @@ class Carrito{
         if (this.totalProductos > 0) {
             botonComprar.classList.remove("oculto"); 
             vaciarCarrito.classList.remove("oculto"); 
+            comprando.innerText =''
             comprando.innerText +=`continua comprando`;
             total.classList.remove('oculto');
             tituloCarrito.innerText +=`Productos en carrito:`;
@@ -189,8 +190,8 @@ function cargarCatalogo(productos) {
                     <div class="col-md-7">
                     <div class="card-body">
                     <h4>${producto.nombre} </h4>
-                    <p>Marca: ${producto.marca}</p>
-                    <p>Total vendidos: ${producto.vendidos}</p>
+                    <p><b>Marca:</b> ${producto.marca}</p>
+                    <p><b>Total vendidos:</b> ${producto.vendidos}</p>
                     <p><b>Precio: $ ${producto.precio}</b></p>
                     <a href="#" class="btn btn-success botonAgregar" data-id="${producto.id}">Agregar al Carrito</a>
                     </div>
@@ -248,7 +249,7 @@ pagar.addEventListener('click', () => {
         title: "¡Su compra ha sido realizada con éxito !",
         text: "Gracias por confiar en nosotros",
         icon: "success",
-        confirmButtonText: "Seguir Comprando",
+        confirmButtonText: "Realiza una ueva Compra",
     });
 });
 // eventos del buscador

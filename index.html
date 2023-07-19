@@ -11,19 +11,35 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="container-flid">
-        <nav class="navbar bg-body-tertiary">
+    <header class="container">
+        <nav class="navbar navbar-expand-lg bg-body-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Menú</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" id="btnTodos" href="#">Catálogo Completo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-success" id="botonMasVendidos" href="#">Los mas vendidos</a>
+                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="filtros" href="#">Marcas disponibles</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
     <main class="container">
         <h1 class="centrar">Solo Cuerdas</h1>
-        <!-- Boton de filtrado, buscador y boton carrito -->
         <section class="botonesHtml">
-            <div>
-                <a href="#" id="btnTodos" class="btn btn-success filtros">Catalogo Completo</a>
-                <a href="#" id="botonMasVendidos" class="btn btn-success filtros">Los mas vendidos</a>
-                <a href="#" id="filtros" class="btn btn-success filtros">Filtrar por Marca</a>
-            </div>
             <div class="buscardorOrdenar">
                 <form class="container" id="formBuscar">
                     <div class="input-group">
@@ -41,7 +57,7 @@
             <section class="carritoGrid">
                 <div class="carritoFlex">
                     <h2><span id="cantidadProductos">(0)</span></h2>
-                    <img id="carrito" src="img/carrito.png" alt="Carrito de compras" class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <img id="carrito" src="img/carrito_3.png" alt="Carrito de compras" class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 </div>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
@@ -52,8 +68,7 @@
                     </div>
                     <h3 class="total">Total: $ <span id="totalCarrito"></span></h3>
                     <div class="botonesCarrito2 oculto">
-                        
-                        <a href="#" id="botonComprar" class="btn btn-success  btnComprar oculto">PAGAR</a>
+                        <a href="#" id="botonComprar" class="btn btn-success btnComprar oculto">PAGAR</a>
                         <img src="img/vaciar.png" id="vaciar" alt="">
                     </div>
                 </div>
@@ -65,7 +80,7 @@
         <div class="grid-container">
             <!-- filtros -->
             <section class="seccionFiltros">
-                <h4>Marca</h4>
+                <h4>Selecciona tu marca preferida</h4>
                 <div id="filtrosMarca"></div>
             </section>
             <!-- catalogo -->
