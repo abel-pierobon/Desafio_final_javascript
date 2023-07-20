@@ -135,14 +135,14 @@ class Carrito{
             botonComprar.classList.remove("oculto"); 
             vaciarCarrito.classList.remove("oculto"); 
             comprando.innerText =''
-            comprando.innerText +=`continua comprando`;
+            comprando.innerText =`continua comprando`;
             total.classList.remove('oculto');
-            tituloCarrito.innerText +=`Productos en carrito:`;
+            tituloCarrito.innerText =`Productos en carrito:`;
         } else {
             botonComprar.classList.add("oculto"); 
             vaciarCarrito.classList.add("oculto"); 
             comprando.innerText =''
-            comprando.innerText +=`Selecciona tu producto`;
+            comprando.innerText     =`Selecciona tu producto`;
             total.classList.add("oculto"); 
             tituloCarrito.innerText =''
             tituloCarrito.innerText +=`CARRITO VACÍO`;
@@ -182,7 +182,7 @@ function cargarCatalogo(productos) {
     divCatalogo.className = 'row';
     for (const producto of productos) {
         divCatalogo.innerHTML +=  `
-            <div class="card mb-3" style="max-width:850px;">
+            <div class="card mb-3" style="max-width:700px;">
                 <div class="row g-0">
                     <div class="col-md-5">
                     <img class="imagenesCarrito" src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
@@ -249,7 +249,7 @@ pagar.addEventListener('click', () => {
         title: "¡Su compra ha sido realizada con éxito !",
         text: "Gracias por confiar en nosotros",
         icon: "success",
-        confirmButtonText: "Realiza una ueva Compra",
+        confirmButtonText: "Realiza una nueva Compra",
     });
 });
 // eventos del buscador
