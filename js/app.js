@@ -80,6 +80,7 @@ class Carrito{
         for (const producto of this.carrito){
             divCarrito.innerHTML += `
             <h5>${producto.nombre} ${producto.marca} </h5>
+            <p> Precio unitario: ${producto.precio}</p>
             <b> Sub total: $ ${producto.precio * producto.cantidad} </b>
             <p> Cantidad: ${producto.cantidad}</p> 
             <div class="botonesCarrito">
