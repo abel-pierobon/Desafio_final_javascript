@@ -36,6 +36,7 @@ async function apiProductosPorCategoria(categoria = categoriaSeleccionada) {
 }
 // Llama a apiProductosPorCategoria y luego ejecuta filtrosMarca()
 apiProductosPorCategoria().then((productosapi) => {
+    mostrarLoading();
     cargarCatalogo(productosapi);
     filtrosMarca(productosapi);
 });
@@ -47,6 +48,26 @@ function registroPorId(id){
 // // Funcion para traer los registros
 function traerRegistros(){
     return this.instrumentos;
+}
+function mostrarLoading() {
+    Swal.fire({
+        title: "Buscando Productos",
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+        Swal.showLoading();
+        },
+    });
+}
+function loading(){
+    Swal.fire({
+        title: "Cargando productos mas vendidos",
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+        Swal.showLoading();
+        },
+    });
 }
 
 // clase Carrito para agregar productos al carrito
@@ -208,10 +229,11 @@ function cargarCatalogo(productos) {
                 const instrumento = registroPorId(id);
                 carrito.agregar(instrumento);
                 Swal.fire({
-                    title: "¡Producto agregado al carrito!",
-                    timer:1000,     
-                    icon: "success",
-                });
+                    position: 'top-end',
+                    title: 'Producto agregado al carrito',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
             });
         }
     }
@@ -241,6 +263,12 @@ const carrito = new Carrito();
 // Eliminar todos los productos del carrito
 vaciarCarrito.addEventListener('click', () => {
     carrito.vaciarCarrito();
+    Swal.fire({
+        position: 'top',
+        title: 'Carrito eliminado',
+        showConfirmButton: false,
+        timer: 1000
+    })
 });
 // reiniciar carrito al comprar
 pagar.addEventListener('click', () => {
@@ -339,6 +367,7 @@ ordenar.addEventListener('change', (event) => {
 const btnMasVendidos = document.querySelector('#botonMasVendidos');
 function masVendidos(productos) {
     const productosMasVendidos = productos.slice().sort((a, b) => b.vendidos - a.vendidos);
+    loading();
     cargarCatalogo(productosMasVendidos.slice(0,5));
 }
 // llamo a los mas vendidos
@@ -349,6 +378,7 @@ btnMasVendidos.addEventListener('click', (event) => {
 const todosLosProductos= document.querySelector('#btnTodos');
 btnTodos.addEventListener('click',(event) =>{
     event.preventDefault();
+    mostrarLoading();
     cargarCatalogo(productos)
 });
 
