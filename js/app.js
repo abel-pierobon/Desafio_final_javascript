@@ -1,5 +1,4 @@
-
-// clase molde para instrumentos
+// Clase molde para instrumentos
 class Instrumento {
     constructor(id, imagen = false, nombre, marca, precio,vendidos) {
         this.id= id;
@@ -10,66 +9,6 @@ class Instrumento {
         this.vendidos = parseInt(vendidos);
     }
 }
-
-let productos=[];
-
-const categoriaSeleccionada = "MLA4275";
-const limiteProductos =50;
-async function apiProductosPorCategoria(categoria = categoriaSeleccionada) {
-        const response = await fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${categoria}&limit=${limiteProductos}&offset=0&q=cuerdas`);
-        const api = await response.json();
-        const productosMercadoLibre = api.results;
-        console.log(productosMercadoLibre);
-        productos = [];
-        for (const productoMl of productosMercadoLibre) {
-            productos.push(new Instrumento(
-                productoMl.id,
-                productoMl.thumbnail_id,
-                productoMl.title.slice(0, 60) + "...",
-                productoMl.attributes[0].value_name,
-                productoMl.price,
-                productoMl.sold_quantity
-            ));
-        }
-        // Resuelve la promesa con los datos
-        return productos;
-}
-// Llama a apiProductosPorCategoria y luego ejecuta filtrosMarca()
-apiProductosPorCategoria().then((productosapi) => {
-    mostrarLoading();
-    cargarCatalogo(productosapi);
-    filtrosMarca(productosapi);
-});
-
-function registroPorId(id){
-    return productos.find((instrumento) => instrumento.id === id);
-}
-
-// // Funcion para traer los registros
-function traerRegistros(){
-    return this.instrumentos;
-}
-function mostrarLoading() {
-    Swal.fire({
-        title: "Buscando Productos",
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: () => {
-        Swal.showLoading();
-        },
-    });
-}
-function loading(){
-    Swal.fire({
-        title: "Cargando productos mas vendidos",
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: () => {
-        Swal.showLoading();
-        },
-    });
-}
-
 // clase Carrito para agregar productos al carrito
 class Carrito{
     constructor(){
@@ -96,7 +35,7 @@ class Carrito{
         }
     this.listar();
     }
-    //Método para quitar directamente productos del carrito sin importar la cantidad de productos que haya en el mismo
+    //Método para quitar directamente un producto del carrito sin importar la cantidad de productos que haya en el mismo
     quitar(id){
         const indice = this.carrito.findIndex((producto) => producto.id===id);
         this.carrito.splice(indice,1);
@@ -114,24 +53,25 @@ class Carrito{
         localStorage.setItem('carrito', JSON.stringify(this.carrito));
         this.listar();
     }
-    //Método para sumar catidades del producto que está en el carrito
+    //Método para sumar cantidades del producto que está en el carrito
     sumar(id){
         const indice = this.carrito.findIndex((producto) => producto.id===id);
         this.carrito[indice].cantidad++;
         localStorage.setItem('carrito', JSON.stringify(this.carrito));
         this.listar();
     }
+    //Método para eliminar directamente todos los productos del carrito 
     vaciarCarrito() {
         this.carrito = []; 
         localStorage.removeItem('carrito'); 
         this.listar(); 
     }
+    // Método para limpiar el carrito una vez que se presiona el boton de "pagar"
     comprarCarrito() {
         this.carrito = []; 
         localStorage.removeItem('carrito'); 
         this.listar();
     }
-    
     //listar los productos del carrito
     listar(){
         divCarrito.innerHTML = '';
@@ -139,7 +79,7 @@ class Carrito{
         this.totalProductos = 0;
         for (const producto of this.carrito){
             divCarrito.innerHTML += `
-            <h4>${producto.nombre} ${producto.marca} </h4>
+            <h5>${producto.nombre} ${producto.marca} </h5>
             <b> Sub total: $ ${producto.precio * producto.cantidad} </b>
             <p> Cantidad: ${producto.cantidad}</p> 
             <div class="botonesCarrito">
@@ -147,6 +87,7 @@ class Carrito{
                 <img src="img/eliminar.png" class="botonQuitar" data-id="${producto.id}" alt="">
                 <img src="img/mas2.png" class="botonSumar" data-id="${producto.id}" alt="">
             </div>
+
             `
             this.total += producto.precio * producto.cantidad;
             this.totalProductos += producto.cantidad;
@@ -168,7 +109,7 @@ class Carrito{
             tituloCarrito.innerText =''
             tituloCarrito.innerText +=`CARRITO VACÍO`;
         }
-        // botones de quitar
+        // funcion del boton de quitar
         const botonesQuitar= document.querySelectorAll('.botonQuitar');
         for (const boton of botonesQuitar){
             boton.addEventListener('click',() => {
@@ -176,6 +117,7 @@ class Carrito{
                 this.quitar(id);
             }
         )}
+        // funcion del boton de quitar
         const restar= document.querySelectorAll('.botonRestar');
         for(const bRestar of restar){
             bRestar.addEventListener('click',() => {
@@ -183,6 +125,7 @@ class Carrito{
                 this.restar(id)
             }
         )}
+        // funcion del boton de sumar
         const sumar= document.querySelectorAll('.botonSumar');
         for(const bSumar of sumar){
             bSumar.addEventListener('click',() => {
@@ -195,9 +138,43 @@ class Carrito{
         spanTotalCarrito.innerHTML= this.total;
     }
 }
-
-//  
-
+// variable global para productos
+let productos=[];
+// conección a api de mercado libre para traer los productos según la categoría de guitarras eléctricas y con un limite de 50 productos
+const categoriaSeleccionada = "MLA4275";
+const limiteProductos =50;
+// funcion asincrónica para traaer los productos
+async function apiProductosDeMercadoLibre(categoria = categoriaSeleccionada) {
+        const response = await fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${categoria}&limit=${limiteProductos}&offset=0&q=guitarra`);
+        const api = await response.json();
+        const productosMercadoLibre = api.results;
+        console.log(productosMercadoLibre);
+        productos = [];
+        for (const productoMl of productosMercadoLibre) {
+            // Agregar a la clase Intrumento los productos obtenidos
+            productos.push(new Instrumento(
+                productoMl.id,
+                productoMl.thumbnail_id,
+                productoMl.title.slice(0, 60) + "...",
+                productoMl.attributes[0].value_name,
+                productoMl.price,
+                productoMl.sold_quantity
+            ));
+        }
+        // Resuelve la promesa con los datos
+        return productos;
+}
+// Llama a apiProductosDeMercadoLibre y luego ejecuta filtrosMarca(), si no se hace en ese orden la funcion de filtros marca no carga debido a que cargarCatalogo es asincrónica
+apiProductosDeMercadoLibre().then((productosapi) => {
+    mostrarLoading();
+    cargarCatalogo(productosapi);
+    filtrosMarca(productosapi);
+});
+// Busca un producto por ID, si lo encuentra lo retorna en forma de objeto
+function registroPorId(id){
+    return productos.find((instrumento) => instrumento.id === id);
+}
+//  Funcion de cargar el catalogo, tiene clases de bootstrap y modifica en html en la seccion de catalogo
 function cargarCatalogo(productos) {
     divCatalogo.innerHTML = '';
     divCatalogo.className = 'row';
@@ -240,6 +217,28 @@ function cargarCatalogo(productos) {
         }
     }
 }
+// funcion de loadind para llamar antes que se carguen los productos del catálogo
+function mostrarLoading() {
+    Swal.fire({
+        title: "Buscando Productos",
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+        Swal.showLoading();
+        },
+    });
+}
+// funcion de loadind para llamar antes que se carguen los productos más vendidos
+function loading(){
+    Swal.fire({
+        title: "Cargando productos mas vendidos",
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+        Swal.showLoading();
+        },
+    });
+}
 
 // elementos 
 const divCatalogo = document.querySelector("#divCatalogo"); 
@@ -262,7 +261,7 @@ const comprando = document.getElementById('btnSeguirComprando');
 // objeto carrito
 const carrito = new Carrito(); 
 
-// Eliminar todos los productos del carrito
+// Evento para eliminar todos los productos del carrito
 vaciarCarrito.addEventListener('click', () => {
     carrito.vaciarCarrito();
     Swal.fire({
@@ -272,7 +271,7 @@ vaciarCarrito.addEventListener('click', () => {
         timer: 1000
     })
 });
-// reiniciar carrito al comprar
+// Evento para reiniciar carrito al comprar
 pagar.addEventListener('click', () => {
     carrito.comprarCarrito();
     Swal.fire({
@@ -282,38 +281,35 @@ pagar.addEventListener('click', () => {
         confirmButtonText: "Realiza una nueva Compra",
     });
 });
-// eventos del buscador
+// eventos del buscador (busca por la descripción del producto una vez que se carga la funcion cargarCatalogo dentro de esos mismos productos cargados)
 let resultados=[];
-
-formBuscar.addEventListener('submit',(event)=>{
-    event.preventDefault();
-    const palabra= inputBuscar.value;
-    resultados = apiProductosBusqueda(palabra.toLowerCase())
-    cargarCatalogo(resultados);
-})
-
-inputBuscar.addEventListener('keyup',(event)=>{
-    event.preventDefault();
-    const palabra= inputBuscar.value;
-    resultados = apiProductosBusqueda(palabra.toLowerCase())
-    cargarCatalogo(resultados);
-})
-cargarCatalogo(resultados);
-botonFiltros.addEventListener("click", () => {
-    document.querySelector(".seccionFiltros").classList.toggle("desplegarFiltros");
-});
-
-
 function apiProductosBusqueda(palabra) {
     // Filtra los productos por nombre o descripcion, teniendo en cuenta la palabraBusqueda
     return productos.filter((instrumento) =>
         instrumento.nombre && instrumento.nombre.toLowerCase().includes(palabra)
     );
 }
+formBuscar.addEventListener('submit',(event)=>{
+    event.preventDefault();
+    const palabra= inputBuscar.value;
+    resultados = apiProductosBusqueda(palabra.toLowerCase())
+    cargarCatalogo(resultados);
+})
+inputBuscar.addEventListener('keyup',(event)=>{
+    event.preventDefault();
+    const palabra= inputBuscar.value;
+    resultados = apiProductosBusqueda(palabra.toLowerCase())
+    cargarCatalogo(resultados);
+})
 
+// Cargar los resultados de la busqueda
+cargarCatalogo(resultados);
+
+// función para generar las marcas de los instrumentos del catalogo para luego realizar un filtro sobre dichas marcas
 function filtrosMarca(productos) {
     // Array para almacenar los nombres de productos agregados
     const marcasAgregadas = [];
+    // ciclo for para buscar las marcas de los productos del catalogo y no repetir ninguna
     for (const instrumento of productos) {
         if (!marcasAgregadas.includes(instrumento.marca)) {
         divFiltrosMarca.innerHTML +=  
@@ -326,9 +322,12 @@ function filtrosMarca(productos) {
         }
     }
 }
-
-divFiltrosMarca.addEventListener('change', filtrarCatalogo);
-
+// Evento para desplegar los filtros generados en función filtrosMarca
+botonFiltros.addEventListener("click", (event) => {
+    event.preventDefault();
+    document.querySelector(".seccionFiltros").classList.toggle("desplegarFiltros");
+});
+// función para filtrar los productos cargagos con la funcion asincrónica "cargarCatalogo" según los filtros obtenidos por marca
 function filtrarCatalogo() {
     const checkboxes = divFiltrosMarca.querySelectorAll('input[type="checkbox"]');
     const marcasFiltradas = Array.from(checkboxes)
@@ -346,6 +345,10 @@ function filtrarCatalogo() {
         cargarCatalogo(productosFiltrados); 
     }
 }
+// Evento para llamar la función de filtrar el catálogo según marca
+divFiltrosMarca.addEventListener('change', filtrarCatalogo);
+
+// Funciones para ordenar los productos del catálogo según su precio
 function mostrarProductosPorPrecioAscendente(productos) {
     const productosOrdenados = productos.slice().sort((a, b) => a.precio - b.precio);
     cargarCatalogo(productosOrdenados);
@@ -354,6 +357,7 @@ function mostrarProductosPorPrecioDescendente(productos) {
     const productosOrdenados = productos.slice().sort((a, b) => b.precio - a.precio);
     cargarCatalogo(productosOrdenados);
 }
+// Eventos para llamar a las funciones de orden de precio
 ordenar.addEventListener('change', (event) => {
     event.preventDefault();
     const valorSeleccionado = ordenar.value;
@@ -366,19 +370,23 @@ ordenar.addEventListener('change', (event) => {
         cargarCatalogo(productos);
     }
 })
+
 const btnMasVendidos = document.querySelector('#botonMasVendidos');
+// Función para encontrar los productos más vendidos de acuerdo a su cantidad
 function masVendidos(productos) {
     const productosMasVendidos = productos.slice().sort((a, b) => b.vendidos - a.vendidos);
     loading();
     cargarCatalogo(productosMasVendidos.slice(0,5));
     console.log(productosMasVendidos.slice(0,5));
 }
-// llamo a los mas vendidos
+// Evento para llamar a la función de productos mas vendidos
 btnMasVendidos.addEventListener('click', (event) => {
     event.preventDefault();
     masVendidos(productos);
 });
+
 const todosLosProductos= document.querySelector('#btnTodos');
+// Evento para llamar a la función original de cargarCatalogo
 btnTodos.addEventListener('click',(event) =>{
     event.preventDefault();
     mostrarLoading();

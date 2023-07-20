@@ -13,7 +13,7 @@
 <body>
     <!-- Header con clases de bootstrap -->
     <header class="container-fluid  cardHeader">
-        <!-- NAvegador para fitrar por secciones y desplegar el filtro de marcas -->
+        <!-- Navegador para fitrar por secciones y desplegar el filtro de marcas -->
         <img class="logo" src="img/logo.png" />
         <nav class="navbar navbar-expand-lg bg-body-dark">
             <div class="container-fluid">
@@ -39,6 +39,10 @@
                 </div>
             </div>
         </nav>
+        <div class="carritoFlex">
+            <h2><span id="cantidadProductos">(0)</span></h2>
+            <img id="carrito" src="img/carrito_3.png" alt="Carrito de compras" class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        </div>
     </header>
     <!-- Cuerpo del documento donde se visualizan el catalogo de productos, el carrito y los filtros de marca -->
     <main class="container-fluid cardMain">
@@ -61,10 +65,6 @@
             </div>
             <!-- carrito con Bootstrap-->
             <section class="carritoGrid">
-                <div class="carritoFlex">
-                    <h2><span id="cantidadProductos">(0)</span></h2>
-                    <img id="carrito" src="img/carrito_3.png" alt="Carrito de compras" class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                </div>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
                         <h2 class="tituloCarrito">Productos en carrito:</h2>
@@ -72,7 +72,9 @@
                     </div>
                     <div class="offcanvas-body" id="carritoMostrar">
                     </div>
-                    <h3 class="total">Total: $ <span id="totalCarrito"></span></h3>
+                    <div class="ordenTotal">
+                        <h3 class="total">Total: $ <span id="totalCarrito"></span></h3>
+                    </div>
                     <div class="botonesCarrito2 oculto">
                         <a href="#" id="botonComprar" class="btn btn-success btnComprar oculto">PAGAR</a>
                         <img src="img/vaciar.png" id="vaciar" alt="">

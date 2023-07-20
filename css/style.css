@@ -17,7 +17,7 @@ body {
     z-index:2;
     background-color: #198754;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
 }
 .logo{
     width: 140px;
@@ -57,8 +57,8 @@ body {
 }
 /* imagen del carrito y boton para activar el carrito */
 #carrito{
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     top:140px;
     cursor: pointer;
 }
@@ -68,30 +68,23 @@ h2 span {
     background-color: red;
     border-radius: 120px;
     padding: 5px;
-    width: 25px;
-    top: 100px;
+    right: 100px;
+    width: 20px;
+    top: 1px;
     text-align: center;
-    font-size: 14px;
-    margin: 10px 0 0 30px;
+    font-size: 10px;
+    margin: px 0 0 20px;
     color: white;
     z-index: 1;
 } 
 
-/* .carritoGrid{
-    grid-column: 3;
-    display: flex;
-    justify-content: end;
-} */
 /* Grid para acomodar el contenido del main */
 .grid-container {
     display: grid;
     grid-template-columns: 10% 80% 10% ;
     margin: 5px;
 }  
-/* .buscador{
-    grid-column: 1;
-    margin-top: 40px;
-} */
+
 /* propiedades de imagenes de */
 .imagenesCatalogo{
     width: fit-content;
@@ -99,12 +92,6 @@ h2 span {
     backface-visibility: inherit;
     max-width: 280px;
 }
-/* .imagenCatalogo{
-    width: 150px;
-    height: 150px;
-    padding: 5px;
-    margin: 2px;
-} */
 /*  Propiedades del filtrado por precio */
 .filtroPorPrecio{
     display: flex;
@@ -199,14 +186,20 @@ img{
 .offcanvas-body{
     flex-grow:0;
 }
-.offcanvas{
-    width: 200px;
+.offcanvas {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+.ordenTotal{
+    display: flex;
+    justify-content: center;
 }
 .total{
-    background-color:  rgb(95, 160, 95);
+    background-color:  #198754;
     border-style: solid;
     border-radius: 10px;
-    font-weight: 900;
+    font-weight: 700;
+    width: 300px;
 }
 #vaciar{
     width: 50px;
@@ -229,7 +222,7 @@ img{
 /* Propiedades de títulos y parrafos */
 h4 {
     font-size: large;
-    font-weight: 900;
+    font-weight: 700;
 }
 b{
     font-size: large;
@@ -246,11 +239,16 @@ h3{
 h3{
     text-align: center;
 } 
+h5{
+    color: antiquewhite;
+}
+
 /* propiedades de la seccion filtros */
 .seccionFiltros{
     display: none; 
 }
 .desplegarFiltros{
+    position: fixed;
     grid-column: 1;
     display: flex;
     flex-direction: column;
@@ -262,7 +260,7 @@ h3{
     width: 200px;
     box-shadow: -6px -2px 25px -13px rgba(0, 0, 0, 0.5);
     height: fit-content;
-    top:10px;
+    top:200px;
 }
 .filtros{
     grid-column: 1;
