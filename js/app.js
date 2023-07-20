@@ -16,7 +16,7 @@ let productos=[];
 const categoriaSeleccionada = "MLA4275";
 const limiteProductos =50;
 async function apiProductosPorCategoria(categoria = categoriaSeleccionada) {
-        const response = await fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${categoria}&limit=${limiteProductos}&offset=0&q=guitarra`);
+        const response = await fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${categoria}&limit=${limiteProductos}&offset=0&q=cuerdas`);
         const api = await response.json();
         const productosMercadoLibre = api.results;
         console.log(productosMercadoLibre);
@@ -206,16 +206,18 @@ function cargarCatalogo(productos) {
             <div class="card mb-3" style="max-width:700px;">
                 <div class="row g-0">
                     <div class="col-md-5">
-                    <img class="imagenesCarrito" src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
+                        <img class="imagenesCarrito" src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
                     </div>
                     <div class="col-md-7">
-                    <div class="card-body">
-                    <h4>${producto.nombre} </h4>
-                    <p><b>Marca:</b> ${producto.marca}</p>
-                    <p><b>Total vendidos:</b> ${producto.vendidos}</p>
-                    <p><b>Precio: $ ${producto.precio}</b></p>
-                    <a href="#" class="btn btn-success botonAgregar" data-id="${producto.id}">Agregar al Carrito</a>
-                    </div>
+                        <div class="card-body">
+                            <h4>${producto.nombre} </h4>
+                            <p><b>Marca:</b> ${producto.marca}</p>
+                            <p><b>Total vendidos:</b> ${producto.vendidos}</p>
+                            <p><b>Precio: $ ${producto.precio}</b></p>
+                            <div>
+                                <a href="#" class="btn btn-success botonAgregar" data-id="${producto.id}">Agregar al Carrito</a>
+                            </div>   
+                        </div>
                     </div>
                 </div>
             </div>
@@ -369,11 +371,12 @@ function masVendidos(productos) {
     const productosMasVendidos = productos.slice().sort((a, b) => b.vendidos - a.vendidos);
     loading();
     cargarCatalogo(productosMasVendidos.slice(0,5));
+    console.log(productosMasVendidos.slice(0,5));
 }
 // llamo a los mas vendidos
 btnMasVendidos.addEventListener('click', (event) => {
     event.preventDefault();
-    masVendidos(productos)
+    masVendidos(productos);
 });
 const todosLosProductos= document.querySelector('#btnTodos');
 btnTodos.addEventListener('click',(event) =>{

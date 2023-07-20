@@ -17,6 +17,10 @@ body {
     display: flex;
     justify-content: flex-start;
 }
+.logo{
+    width: 140px;
+    height: 70px;
+}
 .navbar-nav{
     .nav-link{
         color:black;
@@ -72,6 +76,7 @@ body {
     width: fit-content;
     height: fit-content;
     backface-visibility: inherit;
+    max-width: 280px;
 }
 .imagenCatalogo{
     width: 150px;
