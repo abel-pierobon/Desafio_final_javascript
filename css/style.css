@@ -1,15 +1,17 @@
+/* resetear estilos */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+/* Estilos body */
 body {
     font-family: "Inter", sans-serif;
     background-image: url('../img/fondoGuitarra.png');
-    /* background-color: rgb(100, 158, 167,0.5); */
     background-size: cover; 
     background-attachment: fixed;
 }
+/* Estilos del Header */
 .cardHeader{
     position:fixed;  
     z-index:2;
@@ -34,62 +36,83 @@ body {
         }
     }
 }
+/* Estilos Main */
 .cardMain{
     padding-top: 120px;
 }
-
-.colores{
-    background-color: rgb(142, 190, 184);
-    background-color: #649ea7 ;
-    background-color: #bddb88;
-    background-color: #e0f3b2;
-    background-color: #eefaa8;
-} 
-.itemNav{
-    font-weight: 900;
+/* propiedad del único h1 solo para la busqueda, no visible */
+.centrar{
+    display: none;
 }
+/* acomodar formulario de busqueda y boton del carrito */
 .botonesHtml{
     display: grid;
     grid-template-columns: 10% auto 10%;
     justify-content: space-around;
     margin: 5px;
 }
+/* formulario de busqueda */
 .buscardorOrdenar{
     grid-column: 2;
 }
-.carritoGrid{
+/* imagen del carrito y boton para activar el carrito */
+#carrito{
+    width: 50px;
+    height: 50px;
+    top:140px;
+    cursor: pointer;
+}
+/* span con cantidad de productos en carrito */
+h2 span { 
+    position: absolute;
+    background-color: red;
+    border-radius: 120px;
+    padding: 5px;
+    width: 25px;
+    top: 100px;
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 0 0 30px;
+    color: white;
+    z-index: 1;
+} 
+
+/* .carritoGrid{
     grid-column: 3;
     display: flex;
     justify-content: end;
-}
+} */
+/* Grid para acomodar el contenido del main */
 .grid-container {
     display: grid;
     grid-template-columns: 10% 80% 10% ;
-    justify-content: space-around;
     margin: 5px;
 }  
-.buscador{
+/* .buscador{
     grid-column: 1;
     margin-top: 40px;
-}
-.imagenesCarrito{
+} */
+/* propiedades de imagenes de */
+.imagenesCatalogo{
     width: fit-content;
     height: fit-content;
     backface-visibility: inherit;
     max-width: 280px;
 }
-.imagenCatalogo{
+/* .imagenCatalogo{
     width: 150px;
     height: 150px;
     padding: 5px;
     margin: 2px;
-}
+} */
+/*  Propiedades del filtrado por precio */
 .filtroPorPrecio{
     display: flex;
     width: 200px;
     border-radius: 5px;
     justify-content: center;
 }
+/* seccion del catalogo */
 #seccionCatalogo{
     grid-column: 2;
     display: flex;
@@ -101,7 +124,7 @@ body {
     flex-direction: row;
     justify-content:space-around;
     justify-items: center;
-    height: fit-content;
+    max-height: 250px;
     margin: 0px 5px 0px 5px;
     text-decoration: none;
 } 
@@ -109,16 +132,18 @@ body {
     max-width: 1200px;
     width: 1200px;
 }
-#carrito{
-    width: 50px;
-    height: 50px;
-    top:140px;
-    cursor: pointer;
-}
 img{
     width: 180px;
     height: 220px;
 }
+.botonAgregar{
+    border-radius: 10px;
+    font-weight:800;
+    font-style: italic;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+/* elementos del carrito */
 #btnSeguirComprando{
     margin-top: 30px;
 }
@@ -131,7 +156,6 @@ img{
     font-style: italic;
     margin: 0px 35px;
 }
-
 .botonSumar{
     border-radius: 10px;
     width: 25px;
@@ -147,7 +171,6 @@ img{
     cursor: pointer;
     font-weight:700;
     font-style: italic;
-
 }
 #cantidadDeProductos {
     position: relative;
@@ -165,20 +188,6 @@ img{
     display: flex;
     flex-direction: column;
 }
-h2 span { 
-    position: absolute;
-    background-color: red;
-    border-radius: 120px;
-    padding: 5px;
-    width: 25px;
-    height: 30px;
-    top: 100px;
-    text-align: center;
-    font-size: 14px;
-    margin: 10px 0 0 30px;
-    color: white;
-    z-index: 1;
-} 
 .btnComprar{
     width: 100px;
     align-items: center;
@@ -187,30 +196,37 @@ h2 span {
 .oculto {
     display: none;
 }
-.marcaCheck{
-    font-weight: 900;
-    cursor: pointer;
-}
-#divCarrito p{
-    margin: 0px;
-    margin-bottom: 0px;
-}
-#divCarrito b{
-    margin: 0px;
-    margin-bottom: 0px;
-}
 .offcanvas-body{
     flex-grow:0;
 }
 .offcanvas{
     width: 200px;
 }
-.centrar{
+.total{
+    background-color:  rgb(95, 160, 95);
+    border-style: solid;
+    border-radius: 10px;
+    font-weight: 900;
+}
+#vaciar{
+    width: 50px;
+    height: 50px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.botonesCarrito{
     display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
-    padding: 10px;
-} 
+    justify-content:center;
+    margin: 10px;
+}
+.botonesCarrito2{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+    align-items:center;
+}
+/* Propiedades de títulos y parrafos */
 h4 {
     font-size: large;
     font-weight: 900;
@@ -227,16 +243,10 @@ h3{
     font-weight: 700;
     justify-content: center;
 }
-.botonAgregar{
-    border-radius: 10px;
-    font-weight:800;
-    font-style: italic;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
 h3{
     text-align: center;
 } 
+/* propiedades de la seccion filtros */
 .seccionFiltros{
     display: none; 
 }
@@ -269,27 +279,4 @@ h3{
     font-style: italic;
     margin: 10px;
 }
-.total{
-    background-color:  rgb(95, 160, 95);
-    border-style: solid;
-    border-radius: 10px;
-    font-weight: 900;
-}
-#vaciar{
-    width: 50px;
-    height: 50px;
-    margin-top: 2px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-.botonesCarrito{
-    display: flex;
-    justify-content:center;
-    margin: 10px;
-}
-.botonesCarrito2{
-    display: flex;
-    justify-content: space-evenly;
-    margin: 10px;
-    align-items:center;
-}
+

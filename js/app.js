@@ -25,7 +25,7 @@ async function apiProductosPorCategoria(categoria = categoriaSeleccionada) {
             productos.push(new Instrumento(
                 productoMl.id,
                 productoMl.thumbnail_id,
-                productoMl.title,
+                productoMl.title.slice(0, 60) + "...",
                 productoMl.attributes[0].value_name,
                 productoMl.price,
                 productoMl.sold_quantity
@@ -206,7 +206,7 @@ function cargarCatalogo(productos) {
             <div class="card mb-3" style="max-width:700px;">
                 <div class="row g-0">
                     <div class="col-md-5">
-                        <img class="imagenesCarrito" src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
+                        <img class="imagenesCatalogo" src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
