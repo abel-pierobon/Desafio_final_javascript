@@ -208,7 +208,7 @@ function cargarCatalogo(productos) {
                 const instrumento = registroPorId(id);
                 carrito.agregar(instrumento);
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'top',
                     title: 'Producto agregado al carrito',
                     showConfirmButton: false,
                     timer: 1000
