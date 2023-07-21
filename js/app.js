@@ -308,7 +308,7 @@ cargarCatalogo(resultados);
 
 // función para generar las marcas de los instrumentos del catalogo para luego realizar un filtro sobre dichas marcas
 function filtrosMarca(productos) {
-    // Array para almacenar los nombres de productos agregados
+    // Array para almacenar las marcas de productos agregados
     const marcasAgregadas = [];
     // ciclo for para buscar las marcas de los productos del catalogo y no repetir ninguna
     for (const instrumento of productos) {
@@ -331,8 +331,10 @@ botonFiltros.addEventListener("click", (event) => {
 // función para filtrar los productos cargagos con la funcion asincrónica "cargarCatalogo" según los filtros obtenidos por marca
 function filtrarCatalogo() {
     const checkboxes = divFiltrosMarca.querySelectorAll('input[type="checkbox"]');
+    // Se usa el metodo Array.from() para convertir los resultados obtenidos en un array de elementos
     const marcasFiltradas = Array.from(checkboxes)
         .filter((checkbox) => checkbox.checked)
+        // El método map recorre cada checkbox y retorna un nuevo Array con los valores de las marcas de los elementos siguientes (nextElementSibling) de los checkboxes
         .map((checkbox) => checkbox.nextElementSibling.textContent);
 
     if (marcasFiltradas.length === 0) {
@@ -387,7 +389,7 @@ btnMasVendidos.addEventListener('click', (event) => {
 });
 
 const todosLosProductos= document.querySelector('#btnTodos');
-// Evento para llamar a la función original de cargarCatalogo
+// Evento para volver llamar a la función original de cargarCatalogo
 btnTodos.addEventListener('click',(event) =>{
     event.preventDefault();
     mostrarLoading();
