@@ -305,20 +305,11 @@ inputBuscar.addEventListener('keyup',(event)=>{
         divCatalogo.innerHTML = `
         <div class="card">
             <div class="card-body">
-            <h2>No hay productos con esa descripción</h2
+            <h2>No hay productos con la descripción "${palabra}"</h2
             </div>
         </div>
         `
     }
-    // if (resultados.length===0){
-    //     Swal.fire({
-    //         position: 'center',
-    //         title: 'No hay productos para la busqueda seleccionada',
-    //         showConfirmButton: false,
-    //         timer: 2000
-    //     })
-    //     cargarCatalogo(productos)
-    // }
 })
 
 
