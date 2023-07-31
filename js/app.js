@@ -141,7 +141,7 @@ class Carrito{
 }
 // variable global para productos
 let productos=[];
-// conección a api de mercado libre para traer los productos según la categoría de guitarras eléctricas y con un limite de 50 productos
+// conexión a api de mercado libre para traer los productos según la categoría de guitarras eléctricas y con un limite de 50 productos
 const categoriaSeleccionada = "MLA4275";
 const limiteProductos =50;
 // funcion asincrónica para traaer los productos
@@ -218,7 +218,7 @@ function cargarCatalogo(productos) {
         }
     }
 }
-// funcion de loadind para llamar antes que se carguen los productos del catálogo
+// funcion de loading para llamar antes que se carguen los productos del catálogo
 function mostrarLoading() {
     Swal.fire({
         title: "Buscando Productos",
@@ -229,7 +229,7 @@ function mostrarLoading() {
         },
     });
 }
-// funcion de loadind para llamar antes que se carguen los productos más vendidos
+// funcion de loading para llamar antes que se carguen los productos más vendidos
 function loading(){
     Swal.fire({
         title: "Cargando productos mas vendidos",
@@ -303,8 +303,6 @@ inputBuscar.addEventListener('keyup',(event)=>{
     cargarCatalogo(resultados);
 })
 
-// Cargar los resultados de la busqueda
-cargarCatalogo(resultados);
 
 // función para generar las marcas de los instrumentos del catalogo para luego realizar un filtro sobre dichas marcas
 function filtrosMarca(productos) {
